@@ -1,0 +1,55 @@
+21.01.20 DB
+
+1. 식약처
+ - 솔리데오시스템즈
+ - 인포벨리코리아
+< 식품의약품안전처 제조업/위탁제조판매업/수입업 허가 >
+ - 넥사크로, Spring, Oracle
+CID_ENTP_PERMIT
+DRA_ENTP_PERMIT
+
+<식품의약품안전처 품목허가>
+DRB_ITEM
+
+2. 관세청
+ - CUPIA(관세종합운영망)
+ - KCNET
+ - KTNET
+<마약품 원료물질 수출/수입 민원>
+ - JSP, Servel, Oracle
+ - CTR : MtriMtrxExpchngApreApfmMtCtr.java
+ - SVC : MtriMtrExpChngApreApfmMtSvc.java
+ - VC : MtriMtrExpDcshCVo.java
+ - CSW0101174S.xml
+ - CSW0101174S.js
+
+ATM 과정
+카드>ATM>DBMS
+
+사용 중 오류가 생겼을 시 자동ROLLBACK(처음분으로)
+
+트랜잭션의 특징
+- Atomicity(원자성) : 트랜잭션의처리는 완전히끝마치치 않을 경우에는
+전혀 이루어지징 않은 것과 같아야 한다. All or Nothing
+- Consistency(일관성) : 트랜잭션들간의 영향이 한 방향으로만 전달되어야 한다
+- Isolation(고립성) : 트랜잭션의 부분적인 상태를 다른트랜잭션에 제공해서는 안됨
+- Durability(지속성) : 성공적인트랜잭션의 수행후에는 반드시 DB에반영되어야 한다
+Q. Isolation에서 동일한 시각(1/1000초의 시간도 같을 경우)에 동일한 요청을 할 경우
+오류? 우선순위는?
+
+모든 작업 전 SELECT로 검수 해 볼것
+
+DML
+-UPDATE(조심히 사용할 것)
+UPDATE  테이블 명 SET  필드명1 = 값1,
+                                              필드명2 = 값2. . .,
+  WHERE  <검색 조건>
+
+UPDATE: 갱신하고자 하는 테이블을 지정
+SET: 새로운 데이터로 갱신
+WHERE: 갱신하기 원하는 데이터의 검색 조건
+
+
+DCL
+COMMIT: 트랜잭션의 마지막 종료 및 저장하는 기능
+ROLLBACK: 최초 트랜잭션의 시작부분으로 돌아감

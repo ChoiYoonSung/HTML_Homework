@@ -1,0 +1,91 @@
+설치 과정 정리 ppt 제작
+경로 \\cen-pc
+자바프로그래밍기초_설치하기_이름
+01.15까지
+
+Java JDK
+JDK version 7
+1 oracle 홈페이지
+2 홈페이지 하단 개발자
+3 오른쪽 다운로드
+4 맨 하단 아카이브
+5 7버전 로그인 후 다운로드
+
+JDK version 8
+위의 과정과 동일
+---------------------------------
+이클립스
+압축해제 후 이클립스 환경 수정
+>>1024
+이클립스 실행파일 실행
+
+크게 세 부분으로 나뉨
+왼쪽 : 탐색기 / 가운데 : 입력 / 아래 : 입출력 창
+
+인코딩 설정
+인코딩이 다를 시 글자가 깨질 수 있음
+Window > Preferences > 검색창 > encoding
+ -Content types
+   Default encoding -> UTF-8
+ -Workspace
+   Text file encoding -> Other : UTF-*
+ -CSS Files / HTML Files / JSP Files / XML Files
+   encoding -> UTF-8
+
+탐색기 -> 우클릭 -> new  -> Java Project
+(Java Project 없을 시 other 누른 후 Java Project 검색)
+프로젝트 명 입력 후 생성
+
+프로젝트 우클릭 -> new -> Class
+public static void main
+
+패키지를 따로 만들어주지 않은 상태에서 생성하는 경우
+default package의 하위로 생성됨
+
+글씨크기 변경 단축키 (ctrl) + (+/-)
+or Window -> Preferences -> General -> Appearance -> Colors and Fonts
+
+이클립스에서 저장 시 저장과 동시에 컴파일 됨
+
+-------------------------------------
+SQL Developer
+오라클을 쉽게 사용할 수 있도록 도와주는 프로그램
+
+SQL Developer 다운로드 과정
+오라클 홈페이지 접속
+검색창 sql developer 검색 후 클릭
+압축파일 다운로드 후 압축해제
+
+실행
+SQL Developer 실행시 JDK 1.8 버전의 폴더를 선택 후 실행
+
+시스템 계정
+이름 - system
+비밀번호 - java(공통)
+
+과정 이후 테스트에서 상태가 성공으로 뜰 경우 저장, 접속
+
+
+--------------------------------------------
+1. JAVA 7, 8버전 설치방법
+1) 오라클 홈페이지(https://www.oracle.com/kr/index.html) 접속
+2) 하단 메뉴 [다음을 위한 리소스 - 개발자 클릭]
+3) 기술 메뉴 [Java] 클릭
+4) [Java SE 다운로드] 클릭
+5) 우측메뉴 [Know more - downloads] 클릭
+6) 최하단 [Java Archive] 클릭
+7) [Java SE 7] 클릭 / 8의 경우 [Java SE 8 (8u202 and earlier)] 을 클릭
+8) [Windows x64] 에 해당하는 파일 다운로드 (오라클 회원가입 및 로그인 필요)
+9) 설치 진행
+: 설치 시, D:\B_Util\2.Java\ 해당 경로에 [JDK1.7] (8의 경우, [JDK1.8]로 생성)폴더 생성하여 설치 경로 설정 -> JDK 설치 후, jre 설치하겠냐는 안내문에는 [cancel] 클릭 -> 팝업창 [yes] 클릭 -> [close] 클릭 – 설치완료
+※ JDK 는 '개발'도구, Jre 는 '실행'도구 / JDK 안에 jre가 포함되어 있기 때문에 설치 하지 않음.
+ 
+2. [환경 변수] 등록
+1) [내PC] 우 클릭 - [시스템] - 좌측 [고급시스템설정]
+2) 하단 [환경변수] 클릭
+3) 메뉴 : [시스템 변수] - [새로만들기] 
+4) - 변수이름 : JAVA_HOME / 변수값 : D:\B_Util\2.Java\JDK1.7 입력
+5) 시스템변수 - 변수 : Path 클릭 - 편집
+6) [새로만들기] ->  [%JAVA_HOME%\bin] 입력 후, 확인
+
+

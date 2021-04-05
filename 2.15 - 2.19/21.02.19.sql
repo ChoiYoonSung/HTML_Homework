@@ -1,0 +1,202 @@
+--EXCEPTION (예외처리)
+--1. 정의된 Oracle Server Error
+--2. 정의 되지 않은 Oracle Server Error
+--3. 사용자 정의 Error
+--대부분의 예외에서는 구문 그대로 읽으면 알 수 있다
+
+DECLARE
+  V_NM VARCHAR2(30);
+BEGIN
+  SELECT LPROD_NM INTO V_NM
+  FROM LPROD
+  WHERE LPROD_GU = 'Z101';
+  
+  DBMS_OUTPUT.PUT_LINE(V_NM);
+  
+  EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+       DBMS_OUTPUT.PUT_LINE('정보 없음' || SQLCODE || SQLERRM);
+      WHEN TOO_MANY_ROWS THEN
+       DBMS_OUTPUT.PUT_LINE('다중행 오류' || SQLCODE|| SQLERRM);
+      WHEN OTHERS THEN
+       DBMS_OUTPUT.PUT_LINE('기타 오류');
+      
+END;
+/
+
+--정의 되지 않은 예외
+DECLARE
+  --예외처리형의 EXP1 변수 선언
+  EXP1 EXCEPTION;
+  --PRAGMA : 컴파일때만 실행 BUY, 실행시에는 실행 안됨
+  --EXCEPTINO INIT : 예외처리형 EXP1 변수와 오류코드번호를 매핑
+  PRAGMA EXCEPTION_INIT(EXP1, -2292);
+BEGIN
+  DELETE FROM LPROD
+  WHERE LPROD_GU = 'P101';
+  
+  EXCEPTION
+    WHEN EXP1 THEN
+      --SQLERM : SQL ERROR MESSAGE
+      DBMS_OUTPUT.PUT_LINE('삭제불가' || SQLERRM);
+END;
+/
+
+--종속삭제(cascaade) : 부모테이블의 데이터를 삭제하면 자식테이블의 데이터도 삭제된다
+
+--MEMBER 테이블에 a001 회원의 정보를 삭제
+--MEMBER 테이블의 MEM_ID를 참조하고 있는 CART테이블의 CART_MEMBER(FK)로 인해
+--MEMBER테이블 데이터가 삭제가 되지 않는데 예외로 처리하기
+DECLARE
+  EXCP EXCEPTION;
+  PRAGMA EXCEPTION_INIT(EXCP, -2292);
+BEGIN
+  DELETE FROM MEMBER
+  WHERE MEM_ID = 'a001';
+  
+  EXCEPTION
+    WHEN EXCP THEN 
+      DBMS_OUTPUT.PUT_LINE(SQLERRM);
+END;
+/
+
+ACCEPT p_lgu PROMPT '등록하려는 분류코드 입력:'
+DECLARE
+  exp_lprod_gu exception;
+  v_lgu VARCHAR2(10) := UPPER('&p_lgu');
+BEGIN
+  IF v_lgu IN ('P101','P102','P201','P202') THEN
+    RAISE exp_lprod_gu;
+  END IF;
+  DBMS_OUTPUT.PUT_LINE(v_lgu || '는 등록 가능');
+EXCEPTION
+  WHEN exp_lprod_gu THEN
+    DBMS_OUTPUT.PUT_LINE(v_lgu || '는 이미 등록된 코드입니다.');
+END;
+
+/
+--사용자 정의 예외
+--MEMBER테이블 회원ID b001을 추가하려고 할 때
+--사용자 정의 예외를 발생하기
+--회원ID 체크는 a001, b001, c001로 하기
+ACCEPT m_id PROMPT '등록하려는 분류코드 입력:'
+DECLARE
+  EXP_M_ID EXCEPTION;
+  M_ID VARCHAR2(10) := LOWER('&m_id');
+BEGIN
+  IF M_ID IN ('a001','b001','c001') THEN
+    RAISE EXP_M_ID;
+  END IF;
+  INSERT INTO MEMBER(MEM_ID) VALUES(M_ID);
+EXCEPTION
+  WHEN EXP_M_ID THEN
+  DBMS_OUTPUT.PUT_LINE(M_ID || '는 이미 등록');
+END;
+/
+
+--CURSOR문
+--SELECT문에서 생성된 결과 집합에 대해 개별적인 행 단위 작업을 가능하게 함
+--QUERY 결과를 읽거나 수집
+
+--회원의 마일리지 현황 출력
+--직업이 주부인 회원만 출력
+DECLARE
+    V_NAME VARCHAR2(30);
+    V_MILEAGE NUMBER;
+  --커서 선언
+  CURSOR MEM_CUR IS 
+    SELECT MEM_NAME ,MEM_MILEAGE
+    FROM MEMBER
+    WHERE MEM_JOB = '주부'
+    ORDER BY MEM_NAME;
+BEGIN
+  --메모리에 올라감
+  OPEN MEM_CUR;
+  LOOP
+    FETCH MEM_CUR INTO V_NAME, V_MILEAGE;
+    EXIT WHEN MEM_CUR%NOTFOUND;--FETCH에 조건을 걸어 LOOP 탈출
+    DBMS_OUTPUT.PUT_LINE(V_NAME|| V_MILEAGE);
+  END LOOP;
+  CLOSE MEM_CUR;
+END;
+/
+--FOR문에서는 CURSOR의 OPEN과 CLOSE를 자동으로 해준다.
+DECLARE
+  CURSOR MEM_CUR IS 
+    SELECT MEM_NAME ,MEM_MILEAGE
+    FROM MEMBER
+    WHERE MEM_JOB = '주부'
+    ORDER BY MEM_NAME;
+BEGIN
+  FOR MEM_REC IN MEM_CUR LOOP --MEM_REC가 MEM_CUR가 될 때 까지 한 줄씩 가져옴
+    DBMS_OUTPUT.PUT_LINE(MEM_REC.MEM_NAME || MEM_REC.MEM_MILEAGE);
+  END LOOP;
+END;
+/
+--상품코드를 매개변수로 하여 재고 수량 ADD
+CREATE OR REPLACE PROCEDURE USP_GAEDDONG1
+IS
+BEGIN
+    UPDATE PROD
+    SET PROD_TOTALSTOCK = PROD_TOTALSTOCK + 10
+    WHERE PROD_ID = 'P101000001';
+    DBMS_OUTPUT.PUT_LINE('업데이트');
+EXCEPTION
+ WHEN OTHERS THEN
+ DBMS_OUTPUT.PUT_LINE(SQLERRM);
+ ROLLBACK;
+END;
+/
+
+EXEC USP_GAEDDONG1;
+
+/
+SELECT PROD_TOTALSTOCK
+FROM PROD;
+
+/
+CREATE TABLE PROCTEST(
+    PROC_SEQ NUMBER,
+    PROC_CONTENT VARCHAR2(30),
+    CONSTRAINT PK_PROCTEST PRIMARY KEY(PROC_SEQ)
+);
+
+
+--SEQPROC1.NEXTVAL : 1 증가
+--SEQPROC!.CURRVAL : 현재값
+CREATE SEQUENCE SEQPROC1
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE PROCEDURE PROC_TEST
+IS
+BEGIN
+INSERT INTO PROCTEST(PROC_SEQ,PROC_CONTENT) VALUES(SEQPROC1.NEXTVAL,'개똥이');
+END;
+/
+EXEC PROC_TEST;
+/
+SELECT * FROM PROCTEST;
+
+--프로시져 PROC_TEST2 생성
+--실행하면 PROCTEST테이블의 마지막 데이터 삭제
+--삭제할 데이터가 없으면 에러처리 "삭제할 데이터가 없습니다."
+
+
+DECLARE
+    EXCP EXCEPTION;
+    CNT NUMBER;
+    
+CREATE OR REPLACE PROCEDURE PROC_TEST2
+IS
+BEGIN
+    SELECT COUNT(PROC_SEQ) INTO CNT FROM PROCTEST;
+    DELETE FROM PROCTEST WHERE PROD_SEQ = MAX(PROC_SEQ);
+    
+    
+    IF EXCP THEN
+    DBMS_OUTPUT.PUT_LINE('삭제할 데이터가 없습니다.');
+    END IF;
+END;
+

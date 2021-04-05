@@ -1,0 +1,224 @@
+@charset "UTF-8";
+
+div, h1, h2, h3, h4, h5, p, body,ul {
+	margin: 0px;
+	padding: 0px;
+}
+@font-face { 
+	font-family: 'NanumGothic-Bold'; /* 폰트 패밀리 이름 주기*/ 
+	src: url('../resources/fonts/NanumGothic-Bold.ttf'); /*폰트 파일 주소*/ 
+}
+
+body{
+	min-width: 500px;
+	font-family: "NanumGothic-Bold"
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+a:hover {
+	font-weight:bold;
+	text-shadow: 2px 2px 3px white;
+}
+
+header{
+	width: 100%;
+	min-width: 1350px;
+	height: 150px;
+	background-color: black;
+	text-align: center;
+	margin-bottom: 10px;
+}
+#titleimage{
+	width:200px;
+	position:relative;
+	padding-left: 575px;
+	padding-right: 575px;
+	padding-top: 10px;
+}
+nav{
+	width: 100%;
+	min-width: 1350px;
+	height: 75px;
+	background-color: black;
+	align-items: center;
+	border-bottom: 2px solid white;
+	margin-bottom: 10px;
+}
+#nav_ul{
+	min-width: 1350px;
+	position: static;
+	text-align: center;
+	margin:0px;
+	padding-top: 25px;
+	border-radius: 2em;
+}
+#nav_ul li{
+	position:static;
+	padding: 5px;
+	display: inline;
+	margin-left: 50px;
+	margin-right: 50px;
+	font-size: 1.5em;
+	border-radius: 2em;
+}
+aside{
+	width: 300px;
+	min-width: 300px;
+	height: 800px;
+	background-color: black;
+	color: white;
+}
+#left{
+	float: left;
+	text-align: center;
+}
+#left div{
+	background-color: #151515;
+	border-radius: 2em;
+	margin-left:10px;
+	margin-right:10px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.left_ul_li{
+	display: block;
+	font-size: 25px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.left_ul_li:hover{
+	background:gray;
+	border-radius: 2em;
+}
+#container{
+	width: calc(100% - 600px);
+	min-width: 750px;
+	height: 800px;
+	float: left;
+	position: static;
+	display: flex;
+}
+article{
+	width: 100%;
+	height: 100%;
+}
+#frame{
+	width:100%;
+	height: 100%;
+	border: 0px;
+	margin-left: 10px;
+	margin-left: 10px; 
+}
+#right{
+	float: left;
+	display: flex;
+	flex-direction: column;
+}
+
+.right_p{
+	font-size:30px; 
+	height: 50px; 
+	margin: 15px;
+}
+
+#right_form{
+	margin: 30px;
+}
+
+#right button{
+	margin-top: 30px;
+}
+
+footer{
+	height: 80px;
+	width: 100%;
+	min-width: 1150px;
+	float: left;
+	margin-top: 10px;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.frame_div{
+	width: calc(100% - 20px);
+	min-width: 750px;
+	min-height: 800px;
+	background-color: white;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.frame_div_items{
+	min-width: 247px;
+	height: 600px;
+	text-align: center;
+	border: 1px solid gray;
+}
+.frame_div_items div{
+	height: 300px;
+	padding: 20px;
+}
+
+.frame_div_items img{
+	width: 200px;
+	height: auto;
+}
+.frame_div_items p{
+	width: 200px;
+}
+.frame_music_items{
+	min-width: 247px;
+	height: 400px;
+	text-align: center;
+	border: 1px solid gray;
+}
+.frame_music_items div{
+	height: 300px;
+	padding: 20px;
+}
+
+.frame_music_items img{
+	width: 200px;
+	height: auto;
+}
+.frame_music_items p{
+	width: 200px;
+}
+#movie_div, #music_div{
+	width: 100%;
+	height: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#music_div{
+	height: 150px;
+}
+
+#join{
+	width: 100%; 
+	height: 750px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#join div{
+	width: 600px;
+	height: 750px;
+	background-color: #f0f0f0;
+	border: 2px solid #151515;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#join form{
+	font-size: 20px;
+}

@@ -1,0 +1,240 @@
+--서브쿼리 (Query 내의 SELECT문)
+--단일행 서브쿼리
+--결과값이 한개의 행인 서브쿼리
+--= < <= > >=
+
+--다중행 서브쿼리
+--결과값이 여러개의 행인 서브쿼리
+--IN EXISTS
+
+--UPDATE를 하기 전에 SELECT문으로 조건을 확인한 후 UPDATE 실행
+--'이'와 '김'씨 성을 가진 회원의 휴대폰 컬럼에 '011-11-1111'로 갱신
+UPDATE MEMBER
+SET MEM_HP = '011-111-1111'
+WHERE MEM_NAME LIKE '이%' OR MEM_NAME LIKE '김%';
+
+UPDATE MEMBER
+SET MEM_HP = '011-111-1111'
+WHERE SUBSTR(MEM_NAME,1,1) IN ('이','김');
+
+--데이터가 100,000건 이상일 때
+SELECT MEM_ID
+    ,  MEM_NAME
+    ,  MEM_HP
+FROM MEMBER
+WHERE MEM_NAME LIKE '이%' OR MEM_NAME LIKE '김%';
+
+--데이터가 100,000건 이하일 때
+SELECT MEM_ID
+    ,  MEM_NAME
+    ,  MEM_HP
+FROM MEMBER
+WHERE SUBSTR(MEM_NAME,1,1) IN ('이','김');
+
+--트랜잭션 : 데이터베이스에서 변경(Insert,Update,Delete)하기 위해 논리적 기능을 수행하기 위한
+--일련의 연산집합으로서 작업의 단위이다.
+--트랜잭션이 바뀌는 부분은 커밋이 되는 부분이 기준이다. (자동 커밋 : Create, Alter, Drop)
+
+--'a001'인 회원의 데이터를 수정
+--취미 : 독서, 직업 : 군인
+SELECT MEM_LIKE
+    ,  MEM_JOB
+FROM MEMBER
+WHERE MEM_ID = 'a001';
+
+UPDATE MEMBER
+SET MEM_LIKE = '독서'
+,   MEM_JOB = '군인'
+WHERE MEM_ID = 'a001';
+
+--'이'와 '김'씨 성을 가진 회원
+--회원ID가 'a001' 'j001'인 회원 제외 -'099-999-9999'로 갱신
+--논리연산자 NOT AND OR 순으로 실행
+SELECT MEM_ID
+    ,  MEM_NAME
+FROM MEMBER
+WHERE (MEM_NAME LIKE '이%' OR MEM_NAME LIKE '김%')
+AND (MEM_ID NOT IN ('a001', 'j001'));
+
+UPDATE MEMBER
+SET MEM_HP = '099-999-9999'
+WHERE (MEM_NAME LIKE '이%' OR MEM_NAME LIKE '김%')
+AND (MEM_ID NOT IN ('a001', 'j001'));
+
+--회원테이블
+--모든 회원의 마일리지 컬럼값 10% 인상되게 수정
+SELECT MEM_MILEAGE
+FROM MEMBER;
+
+UPDATE MEMBER
+SET MEM_MILEAGE = MEM_MILEAGE*1.1;
+
+--MEMBER테이블
+--마일리지 3000점 이상, 휴대폰번호 011로 시작되는 회원 마일리지 10% 인상
+SELECT NVL(MEM_MILEAGE,0)*1.1
+FROM MEMBER
+WHERE MEM_MILEAGE >= 3000
+AND SUBSTR(MEM_HP,1,3) = '011';
+
+UPDATE MEMBER
+SET MEM_MILEAGE = MEM_MILEAGE * 1.1
+WHERE MEM_MILEAGE >= 3000
+AND SUBSTR(MEM_HP,1,3) = '011';
+
+--테이블 복사
+--SCHEMA : 컬럼, 자료형, 크기, NOT NULL 제약사항... + 데이터 복사
+CREATE TABLE REMAIN2
+AS
+SELECT * FROM REMAIN;
+
+INSERT INTO REMAIN(
+    REMAIN_YEAR
+,   REMAIN_PROD
+,   REMAIN_J_00
+,   REMAIN_I
+,   REMAIN_O
+,   REMAIN_J_99
+,   REMAIN_DATE
+)
+SELECT '2005'
+    ,  REMAIN_PROD
+    ,  REMAIN_J_00
+    ,  REMAIN_I
+    ,  REMAIN_O
+    ,  REMAIN_J_99
+    ,  REMAIN_DATE
+FROM REMAIN
+WHERE REMAIN_YEAR = '2003';
+
+CREATE TABLE LPROD_DELETE
+AS
+SELECT * FROM LPROD;
+
+CREATE TABLE LPROD_TRUNCATE
+AS
+SELECT * FROM LPROD;
+
+CREATE TABLE LPROD_DROP
+AS
+SELECT * FROM LPROD;
+
+--DELETE : 데이터 삭제, 롤백 가능
+DELETE FROM
+LPROD_DELETE;
+
+SELECT * FROM LPROD_DELETE;
+
+ROLLBACK;
+
+--TRUNCATE : 데이터 삭제, 롤백 불가능
+TRUNCATE TABLE LPROD_TRUNCATE;
+
+SELECT * FROM LPROD_TRUNCATE;
+
+ROLLBACK;
+
+--DROP : 테이블, 데이터 모두 삭제
+DROP TABLE LPROD_DROP;
+
+SELECT * FROM LPROD_DROP;
+
+FLASHBACK TABLE LPROD_DROP TO BEFORE DROP;
+
+--재고수불테이블 2003년도 자료
+--출고수량 6개 또는 11개인 자료를 삭제
+SELECT REMAIN_YEAR
+    ,  REMAIN_O
+FROM REMAIN
+WHERE REMAIN_YEAR = '2003'
+AND (REMAIN_O = 6 OR REMAIN_O = 11);
+
+DELETE REMAIN
+WHERE REMAIN_YEAR = '2003'
+AND (REMAIN_O = 6 OR REMAIN_O = 11);
+
+--재고수불테이블 2003년도 자료 중 입고수량+출고수량이 20개 이상인 자료 삭제
+SELECT *
+FROM REMAIN
+WHERE (REMAIN_YEAR = '2003')
+AND (NVL(REMAIN_O,0) + NVL(REMAIN_I,0) >= 20);
+
+DELETE FROM REMAIN
+WHERE (REMAIN_YEAR = '2003')
+AND (NVL(REMAIN_O,0) + NVL(REMAIN_I,0) >= 20);
+
+--VIEW
+--테이블과 유사한 객체
+--테이블 중 일부 컬럼만을 나타내게 할 수 있음
+
+CREATE OR REPLACE VIEW HUMAN
+AS
+SELECT MEM_ID ID
+    ,  MEM_PASS PASS
+    ,  MEM_NAME NAME
+FROM MEMBER;
+
+UPDATE HUMAN
+SET NAME = '미역은대'
+WHERE ID = 'a001';
+
+SELECT * FROM HUMAN;
+
+--LPROD 테이블의 LPROD_GU, LPROD_NM
+--VW_LPROD 뷰 생성
+
+CREATE OR REPLACE VIEW VW_LPROD
+AS
+SELECT LPROD_GU 
+    ,  LPROD_NM 
+FROM LPROD;
+
+UPDATE VW_LPROD
+SET LPROD_GU = 'P409'
+WHERE LPROD_GU = 'P401';
+
+SELECT * FROM VW_LPROD;
+
+--회원정보 중 아이디, 이름, 마일리지를 검색하는 vw)member 뷰테이블
+--컬럼명 memid, name, mileage
+CREATE OR REPLACE VIEW VW_MEMBER1
+AS
+SELECT MEM_ID AS MEMID
+    ,  MEM_NAME AS NAME
+    ,  MEM_MILEAGE AS MILEAGE
+FROM MEMBER;
+
+SELECT * FROM VW_MEMBER1;
+
+--상품테이블에서 상품명이 '삼'으로 시작하는 자료의 상품코드, 상품명, 거래처코드, 거래처명를 조회
+--vw_prod1 뷰테이블 생성
+--prodid, prodname, prodbuyer
+CREATE OR REPLACE VIEW VW_PROD1
+AS
+SELECT PROD_ID prodid
+    ,  PROD_NAME prodname
+    ,  PROD_BUYER prodbuyer
+FROM PROD;
+
+
+SELECT A.PRODID
+    ,  A.PRODNAME
+    ,  A.PRODBUYER
+    ,  B.BUYER_NAME
+FROM VW_PROD1 A INNER JOIN BUYER B ON( PRODBUYER = BUYER_ID)
+WHERE PRODNAME LIKE '삼%';
+
+--상품입고테이블 2005년도 1월 거래처별 매입금액 검색 (매입금액 = 매입수량 * 매입단가)
+--vw_inamt
+--거래처코드 거래처명 매입금액
+
+CREATE OR REPLACE VIEW VW_INAMT
+AS
+SELECT PROD_BUYER buyerid
+    ,  BUYER_NAME buyername
+    ,  SUM(BUY_QTY * BUY_COST) inamt
+FROM BUYER LEFT OUTER JOIN PROD ON BUYER_ID = PROD_BUYER
+           LEFT OUTER JOIN BUYPROD ON PROD_ID = BUY_PROD
+WHERE BUY_DATE LIKE '05/01/%'
+GROUP BY PROD_BUYER, BUYER_NAME, BUY_DATE
+ORDER BY BUY_DATE;
+

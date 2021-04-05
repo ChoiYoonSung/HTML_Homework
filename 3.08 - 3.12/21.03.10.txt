@@ -1,0 +1,56 @@
+CSS
+height -> tr에
+width -> td에
+
+가상클래스 : 지정한 클래스가 아닌 키워드로 클래스를 찾아 활용하는 것
+
+가상클래스 활용
+table tr:first-child{
+	background-color:yellow;
+}
+table tr:nth-child(2n+1){ 	/*짝수 -> 2n /홀수 -> 2n+1*/
+	background-color:lime;
+}
+--n번째
+tr:nth-child(n){~}
+--짝수
+tr:nth-child(2n){~}
+tr:nth-child(even){~}
+--홀수
+tr:nth-child(2n+1){~}
+tr:nth-child(odd){~}
+
+background-repead: repeat;		/*background 반복(바둑판 형식)*/
+
+margin : 선택한 영역 외부
+padding : 선택한 영역 내부
+
+--21.03.10
+레이아웃
+디스플레이(display) 속성
+display:block
+display:inline
+display:inline-block
+display:none
+
+block : 항상 새 줄에서 시작, 한 줄 모두 차지
+inline : 이전 끝나는 부분에서 시작, 필요한 영역만큼만 차지
+
+position
+static: 고정
+relative : 정상적인 위치(원위치)를 기준으로 이동
+absolute : 윈도우(브라우저 창)의 default 위치(좌측상단)를 기준으로 이동(유동적)
+fixed: 윈도우(브라우저 창) 화면에 고정적인 위치
+
+레이아웃의 overflow
+
+시맨틱요소
+웹페이지의 구조를 쉽게 이해할 수 있도록 정의된 태그. 단순한 컨테이너 역할
+<header> 머리말, 상단 로고 혹은 메인메뉴 포함
+<footer> 꼬리말, 연락처 정보 등 포함
+<section> 제목이 있는 주제별 콘텐츠 영역
+<article> 웹페이지와 독립적인 콘텐츠 정의 시 사용
+<nav> 네이게이션 링크
+<aside> 사이드바와 같이 옆에 위치하는 내용
+<figure> 그림이나 도표, 사진같은 태그 지정
+<figcaption> <figure>에 대한 제목이나 설명을 설명하는 요소

@@ -1,0 +1,43 @@
+이벤트
+
+$('요소').click(event)
+$('요소').mouseover(event)
+
+--mouse
+click/dbclick	//클릭
+mousedown	//누름
+mouseup		//뗌
+mouseenter	//커서 올림 (요소의 경계에 자식요소들 포함)
+mouseleave	//커서 뗌 (요소의 경계에 자식요소들 포함)
+hover		//mouseenter+mouseleave
+mousemove	//움직임
+mouseout	//요소벗어남 (요소의 경계에 자식요소들 미포함)
+mouseover	//요소 안에 들어올 때 (요소의 경계에 자식요소들 미포함)
+
+--keyboard
+keypress		//키를 누르고 있을 때
+keydown		//키를 누를 때
+keyup		//키를 뗄 때
+submit		//입력 정보 제출할 때
+change		//정보 변경되었을 때
+focus / blur	//포커스를 얻었을 때
+load		//DOM이 로드 되었을 때
+resize		//DOM 사이즈가 변경되었을 때
+ready		//문서 로드되었을 때
+on / off		//선택 요소 여러 이벤트 넣을/지울 때
+
+ex)
+$('p').on({
+	event : ~~
+	, event : ~~
+	...
+});
+
+// a 태그 - Enter 눌러도 url 넘어가지 않도록 하는 스크립트
+$('a').click(function(event){
+	event.previousDefault();
+};
+
+$('a').click(function(event){
+	return false;
+};

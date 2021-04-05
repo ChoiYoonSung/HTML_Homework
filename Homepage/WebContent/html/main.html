@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="kr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Web Shop</title>
+		<link type="text/css" rel="stylesheet" href="../css/mystyle.css">
+		<style type="text/css">
+			
+		</style>
+		<script type="text/javascript">
+			
+		</script>
+	</head>
+	<body>
+		<header >
+			<a href="main.html"> <img alt="header_img" src="../source/title_img.png" id="titleimage"></a>
+		</header>
+		
+		<nav>
+			<ul id="nav_ul">
+				<li><a href="main.html" onclick="alert('준비중입니다.')">ABOUT US</a></li>
+				<li><a href="main.html" onclick="alert('준비중입니다.')">NEWS</a></li>
+				<li><a href="main.html" onclick="alert('준비중입니다.')">MY ACCOUNT</a></li>
+				<li><a href="main.html" onclick="alert('준비중입니다.')">CONTACTS</a></li>
+				<li><a href="main.html" onclick="alert('준비중입니다.')">SERVICE</a></li>
+			</ul>
+		</nav>
+		
+		<div style="display: flex; flex-wrap: nowrap;">
+			<aside id="left">
+				<h1 style="font-size: 50px; padding-top: 20px; padding-bottom: 30px;">Category</h1>
+				<div>
+					<ul>
+						<li class="left_ul_li"><a href="com.html" target="iframe">컴퓨터</a></li>
+						<li class="left_ul_li"><a href="cloth.html" target="iframe">의류</a></li>
+						<li class="left_ul_li"><a href="movie.html" target="iframe">영화</a></li>
+						<li class="left_ul_li"><a href="music.html" target="iframe">음악</a></li>
+						<li class="left_ul_li"><a href="index.html" target="iframe" onclick="alert('준비중입니다.')">스포츠/레져</a></li>
+						<li class="left_ul_li"><a href="index.html" target="iframe" onclick="alert('준비중입니다.')">가구/인테리어</a></li>
+						<li class="left_ul_li"><a href="index.html" target="iframe" onclick="alert('준비중입니다.')">식품</a></li>
+					</ul>
+				</div>
+			</aside>
+			
+			<section id="container">
+				<article>
+					<iframe id="frame" src="index.html" name="iframe">
+						<p>페이지 로딩에 실패하였습니다.</p>
+					</iframe>
+				</article>
+			</section>
+			
+			<aside id="right">
+				<div style="padding: 15px;">
+					<h3 class="right_p">Shopping Cart</h3>
+					<div class="right_p" style="font-size:20px;"><a href="cart.html" target="_blank">쇼핑카트 보기</a></div>
+					<form id="right_form">
+						<h3 class="right_p" style="margin-top: 50px;">Log In</h3>
+						<p>ID</p>
+						<input size="15" required oninvalid="this.setCustomValidity('Enter ID Here')">
+						<p>Password</p>
+						<input size="15" oninvalid="this.setCustomValidity('Enter Password Here')"><br><br>
+						<input type="submit" value="로그인"> 
+						<input type="reset" value="초기화"><br>
+						<a href="join.html" target="_blank">회원가입 </a>
+						<a href="" onclick="alert('준비중입니다.')">비밀번호 찾기</a>
+					</form>
+				</div>
+			</aside>
+		</div>
+		<footer>
+			<p>Copyrightⓒ  <b>ddit.403</b> ALL Rights Reserved</p>
+		</footer>
+		
+	</body>
+</html>

@@ -1,0 +1,23 @@
+자식필터
+first-child - 첫 번째 자식
+last-child - 마지막 자식
+nth-child(index) - n번째 자식
+neth-child(even/odd/equation) - n번째 자식 중 짝수, 홀수, 특정 인덱스 자식
+only-child - 자식요소만
+
+$('태그').first/last - 태그 중 첫 번째/마지막 요소
+$('태그').first/last-child - 태그 중 첫 번째/마지막 '자식'요소
+
+:contains
+:not
+:has
+:empty
+:parent
+
+:hidden
+:visible
+
+:enabled - 현재 사용 가능한 요소와 일치
+:disabled - 현재 사용 불가능한 요소와 일치
+:selected - 현재 선택된 요소와 일치
+:checked - 현재 체크된 요소와 일치

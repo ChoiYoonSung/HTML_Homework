@@ -1,0 +1,246 @@
+--NULL
+--IS NULL / IS NOT NULL : NULL값인지 아닌지 비교
+--NVL(c, r) : c가 NULL이 아니면 c, NULL이면 r
+--NVL2(c, r1, r2) : c가 NULL이 아니면 r1, NULL이면 r2
+--NULLIF(c, d) : c와 d를 비교해서 같으면 NULL, 다르면 c
+--COALESCE(p, p, ...) : 파라미터중 NULL이 아닌 첫 번째 파라미터 반환
+
+--거래처테이블에서 거래처명, 담당자 조회
+SELECT BUYER_NAME 거래처명
+    ,  BUYER_CHARGER 담당자
+FROM BUYER;
+
+--담당자 성이 김씨인 거래처
+SELECT BUYER_NAME 거래처명
+    ,  BUYER_CHARGER 담당자
+FROM BUYER
+WHERE 1=1 
+--AND BUYER_CHARGER LIKE '김%'
+AND SUBSTR(BUYER_CHARGER, 1, 1) = '김';
+
+UPDATE BUYER
+SET BUYER_CHARGER = NULL
+WHERE BUYER_CHARGER LIKE '김%';
+
+COMMIT;
+
+SELECT * FROM BUYER;
+
+--거래처 담당자 성씨가 '성' 이면 White Space로 갱신
+SELECT BUYER_NAME
+    ,  BUYER_CHARGER
+FROM BUYER
+WHERE BUYER_CHARGER LIKE '성%';
+
+UPDATE BUYER
+SET BUYER_CHARGER = ''
+WHERE BUYER_CHARGER LIKE '성%';
+--오라클에서 ''는 NULL의 의미와 같다
+
+COMMIT;
+
+SELECT BUYER_CHARGER FROM BUYER;
+
+SELECT BUYER_NAME 거래처명
+    ,  BUYER_CHARGER 담당자
+FROM BUYER
+WHERE 1=1
+AND BUYER_CHARGER IS NULL;
+--AND BUYER_CHARGER IS NOT NULL;
+--AND NOT(BUYER_CHARGER IS NULL);
+
+--NVL
+SELECT BUYER_NAME 거래처명
+    ,  BUYER_CHARGER 
+    ,  NVL(BUYER_CHARGER, '없음') 담당자
+FROM BUYER
+WHERE BUYER_CHARGER IS NULL;
+
+--NVL2
+SELECT BUYER_NAME 거래처명
+    ,  BUYER_CHARGER 담당자
+    ,  NVL2(BUYER_CHARGER,'O', 'X') 담당자유무
+FROM BUYER;
+
+--서울에 거주중인 회원의 마일리지 데이터를 NULL로 처리
+SELECT MEM_NAME 이름
+    ,  MEM_ADD1 거주지
+    ,  MEM_MILEAGE 마일리지
+FROM MEMBER
+WHERE MEM_ADD1 LIKE '서울%';
+
+--회원 성씨 'ㅂ'을 포함, 마일리지를 NULL로 갱신
+UPDATE MEMBER
+SET MEM_MILEAGE = ''
+WHERE MEM_NAME >= '바' AND MEM_NAME <= '빟';
+
+SELECT MEM_NAME, MEM_MILEAGE
+FROM MEMBER
+WHERE MEM_NAME >= '바' AND MEM_NAME <= '빟';
+
+COMMIT;
+
+--전체회원 마일리지에 100을 더한 수치
+--Alias 성명 마일리지 변경마일리지
+SELECT MEM_NAME 성명
+    ,  MEM_MILEAGE 마일리지
+    ,  NVL(MEM_MILEAGE, 0) + 100 변경마일리지
+FROM MEMBER;
+
+--마일리지 있으면 '정상회원', NULL이면 비정상회원
+SELECT MEM_NAME 이름
+    ,  MEM_MILEAGE 마일리지
+    ,  NVL2(MEM_MILEAGE, '정상회원', '비정상회원') 회원상태
+FROM MEMBER;
+
+UPDATE MEMBER
+SET MEM_MILEAGE = 100
+WHERE MEM_MILEAGE IS NULL;
+
+SELECT MEM_NAME, MEM_MILEAGE
+FROM MEMBER;
+
+--NULLIF : 같으면 NULL, 다르면 앞 출력
+SELECT NULLIF(123, 123)
+    ,  NULLIF('Hello', 'Hi')
+FROM DUAL;
+
+--시퀀스 보충
+/*
+Sequence는 연속 열거 순서
+Sequence객체는 자동적으로 번호를 생성하기 위한 객체
+Sequence객체는 테이블과 독립적, 여러곳에서 사용 가능
+Sequence를 이용하는 겨우
+- Primary Key를 설정할 후보키가 없거나 PK를 특별히 만들지 않아도 되는 경우
+*/
+
+--시퀀스 생성
+--START WITH : 시작번호
+--INCREMENT BY : 증감
+CREATE SEQUENCE LPROD_SEQ
+INCREMENT BY 1
+START WITH 1;
+
+DROP SEQUENCE LPROD_SEQ;
+
+--시퀀스 1증가
+SELECT LPROD_SEQ.NEXTVAL FROM DUAL;
+
+--현재번호 확인
+SELECT LPROD_SEQ.CURRVAL FROM DUAL;
+
+--사용방법
+CREATE TABLE TESTSEQ(
+  TS_ID NUMBER NOT NULL,
+  TS_NAME VARCHAR2(10),
+  CONSTRAINT PK_TESTSEQ PRIMARY KEY(TS_ID)
+);
+
+CREATE SEQUENCE TESTSEQ_SEQ
+INCREMENT BY 1
+START WITH 1;
+
+DROP SEQUENCE TESTSEQ_SEQ;
+
+--Sequence 생성 직후 CurrentValue 불가
+SELECT TESTSEQ_SEQ.CURRVAL FROM DUAL;
+
+SELECT TESTSEQ_SEQ.NEXTVAL FROM DUAL;
+
+INSERT INTO TESTSEQ(TS_ID, TS_NAME)
+VALUES(TESTSEQ_SEQ.NEXTVAL, '글1');
+
+INSERT INTO TESTSEQ(TS_ID, TS_NAME)
+VALUES(TESTSEQ_SEQ.NEXTVAL, '글2');
+
+INSERT INTO TESTSEQ(TS_ID, TS_NAME)
+VALUES(TESTSEQ_SEQ.NEXTVAL, '글3');
+
+SELECT * FROM TESTSEQ;
+
+--tlznjstm
+--AOA 테이블 생성
+--(NO NUMBER NOT NULL
+--, NAME VARCHAR2(30)
+--, BIR BARCHAR2(20))
+--NO컬럼 기본키
+
+CREATE TABLE AOA(
+    NO NUMBER NOT NULL,
+    NAME VARCHAR2(30),
+    BIR VARCHAR2(20),
+    CONSTRAINT PK_AOA PRIMARY KEY(NO)
+);
+
+CREATE SEQUENCE AOA_SEQ
+INCREMENT BY 1
+START WITH 1;
+
+DROP TABLE AOA;
+DROP SEQUENCE AOA_SEQ;
+
+--시퀀스를 사용하여 데이터를 입력
+SELECT AOA_SEQ.NEXTVAL FROM DUAL;
+
+INSERT INTO AOA(NO, NAME, BIR)
+VALUES(AOA_SEQ.NEXTVAL, '지민', '1991-01-08');
+
+INSERT INTO AOA(NO, NAME)
+VALUES(AOA_SEQ.NEXTVAL, '초아');
+
+INSERT INTO AOA(NO, NAME)
+VALUES(AOA_SEQ.NEXTVAL, '설현');
+
+INSERT INTO AOA(NO, NAME)
+VALUES(AOA_SEQ.NEXTVAL, '유니');
+
+INSERT INTO AOA(NO, NAME)
+VALUES(AOA_SEQ.NEXTVAL, '혜정');
+
+COMMIT;
+
+SELECT * FROM AOA;
+
+--분기
+--DECODE : IF문과 같은 기능
+--DECODE(1, 1, 'A', 2, 'B', 3, 'C', 'default')
+--CASE WHEN : 연속적인 조건문
+
+SELECT DECODE(1
+            , 1, 'A'
+            , 2, 'B'
+            , 3, 'C'
+            ,'default'
+            )
+FROM DUAL;
+
+--상품분류 중 앞의 두 글자가 
+--'P1'이면 판매가를 10% 인상, 'P2'면 판매가 15% 인상, 나머지 동일 판매
+SELECT PROD_NAME 상품명
+    ,  PROD_SALE 판매가
+    ,  DECODE(SUBSTR(PROD_LGU, 1,2)
+            , 'P1', PROD_SALE*1.1
+            , 'P2', PROD_SALE*1.15
+            ,PROD_SALE
+            ) 인상판매가
+FROM PROD;
+
+--대전측기사에서는 3월에 생일인 회원을 대상으로 마일리지 10% 인상
+--3월이 아닌 회원은 짝수인 경우 5% 인상,
+--Alias 회원Id, 회원명, 마일리지, 변경마일리지
+UPDATE MEMBER
+SET MEM_MILEAGE = '0'
+WHERE MEM_MILEAGE IS NULL;
+
+SELECT MEM_ID 회원ID
+    ,  MEM_NAME 회원명
+    ,  MEM_BIR 생일
+    ,  MEM_MILEAGE 마일리지
+    ,  DECODE(SUBSTR(MEM_BIR,4,2)
+              , '03', MEM_MILEAGE*1.1
+              ,  DECODE(MOD(SUBSTR(MEM_BIR,4,2),2)
+                        , 1 , MEM_MILEAGE*1.05
+                        , MEM_MILEAGE
+                 )
+              ) 변경마일리지
+FROM MEMBER;

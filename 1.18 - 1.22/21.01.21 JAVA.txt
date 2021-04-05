@@ -1,0 +1,33 @@
+21.01.21 JAVA
+
+2차원 배열
+
+		int[][] scores =new int[3][5];			//2차원 배열 3*5 scores 생성
+		int[] sum = new int[scores.length];		//1차원 배열 scores.length의 크기 sum생성
+		double[] avg = new double[scores.length];	//1차원배열 scores.length의 크기 avg생성
+		
+		//scores에 랜덤값 부여
+		for(int i = 0; i<scores.length; i++){
+			for(int j = 0; j<scores[i].length; j++){
+				scores[i][j]= (int)(Math.random()*101);
+			}
+			System.out.println(Arrays.toString(scores[i]));
+		}
+		
+		//합계 + 평균
+		for (int i = 0 ; i<scores.length; i++){
+			for(int j = 0 ; j<scores[i].length; j++){
+				sum[i] +=scores[i][j];
+				
+			}
+			avg[i] =(double)(Math.round(sum[i]*10)/scores[i].length)/10;
+		
+		}
+
+		//출력
+				System.out.println("합계"+Arrays.toString(sum));
+				System.out.println("평균"+Arrays.toString(avg));
+		
+		
+		
+		

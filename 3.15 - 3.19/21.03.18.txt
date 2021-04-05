@@ -1,0 +1,13 @@
+HTML
+
+문서 객체 모델(DOM)
+
+HTML요소 찾기
+요소 속성 중 id로 찾기
+document.getElementById("id");
+
+요소 속성 중 name으로 찾기
+document.getElementsByName("name")[0].src;
+
+요소 속성 중 태그 이름으로 찾기
+document.getElementByTagName("tag")[0]

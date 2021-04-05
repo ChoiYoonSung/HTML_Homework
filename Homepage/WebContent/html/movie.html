@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="kr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Movie</title>
+		<link type="text/css" rel="stylesheet" href="../css/mystyle.css">
+		<script>
+			function mv_click(e){
+				var mv_id = document.getElementById(e.getAttribute('id')).getAttribute('id');
+				switch(mv_id){
+					case 'movie1':
+						document.getElementById("movie").src = "https://www.youtube.com/embed/KQ0gFidlro8";
+						break;
+					case 'movie2':
+						document.getElementById("movie").src = "https://www.youtube.com/embed/QKGi9tQqQGQ";
+						break;
+					case 'movie3':
+						document.getElementById("movie").src = "https://www.youtube.com/embed/WAcsM3M685E";
+						break;
+					default:
+						alert("해당 영화 예고편이 없습니다.");
+						break;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="frame_div">
+			<div id="movie_div">
+				<iframe id="movie" height="250px" width="450px" src="-" allowfullscreen></iframe>
+			</div>
+			<div class="frame_div_items">
+				<div>
+					<img alt="movie1" src="../source/movie_img1.jfif" id="movie1" onclick="mv_click(this)">
+				</div>
+				<div>
+					<h3>미나리</h3>
+					<br>
+					<p>주연 : 스티븐 연, 한예리, 앨런 킴, 노엘 케이트 조, 윤여정, 윌 패튼 外</p>
+					<br>
+				</div>
+			</div>
+			<div class="frame_div_items">
+				<div>
+					<img alt="movie2" src="../source/movie_img2.jfif" id="movie2" onclick="mv_click(this)">
+				</div>
+				<div>
+					<h3>귀멸의 칼날 : 무한열차편</h3>
+					<br>
+					<p>주연 : 아베 노조무, 타키구치 테이이치, 키무라 마사루, 미와 카즈히로, 미키 타츠야, 타나카
+						히로노리,쿠니히로 마사유키 外</p>
+					<br>
+				</div>
+			</div>
+			<div class="frame_div_items">
+				<div>
+					<img alt="movie3" src="../source/movie_img3.jfif" id="movie3" onclick="mv_click(this)">
+				</div>
+				<div>
+					<h3>미션파서블</h3>
+					<br>
+					<p>주연 : 김영광, 이선빈, 오대환 外</p>
+					<br>
+				</div>
+			</div>
+
+		</div>
+	</body>
+</html>

@@ -1,0 +1,202 @@
+--장바구니 테이블 일자별 최고 구매수량
+--회원 주문번호, 상품, 수량
+--Alias 회원 일자 상품 수량
+SELECT A.CART_MEMBER 회원ID
+    ,  TO_CHAR(TO_DATE(SUBSTR(A.CART_NO,1,8),'YYYYMMDD'),'YYYY"년" MM"월" DD"일"') 일자
+    ,  A.CART_PROD 상품
+    ,  A.CART_QTY 수량
+FROM CART A
+WHERE A.CART_QTY = (
+        SELECT MAX(B.CART_QTY)
+        FROM CART B
+        WHERE SUBSTR(A.CART_NO,1,8) = SUBSTR(B.CART_NO,1,8)
+        )
+ORDER BY SUBSTR(A.CART_NO,1,8);
+
+--카티젼 프로덕트
+SELECT R.A, R.B, R.C
+    ,  S.C, S.D, S.E
+FROM R, S;
+--CROSS JOIN
+SELECT R.A, R.B, R.C
+    ,  S.C, S.D, S.E
+FROM R CROSS JOIN S;
+
+--내부조인
+SELECT R.A, R.B, R.C
+    ,  S.C, S.D, S.E
+FROM R, S
+WHERE R.C = S.C;
+--INNER JOIN
+SELECT R.A, R.B, R.C
+    ,  S.C, S.D, S.E
+FROM R INNER JOIN S ON R.C = S.C;
+
+--외부조인
+SELECT R.A, R.B, R.C
+    ,  S.C, S.D, S.E
+FROM R, S
+WHERE R.C = S.C(+);
+--OUTER JOIN
+SELECT R.A, R.B, R.C
+    ,  S.C, S.D, S.E
+FROM R LEFT OUTER JOIN S ON R.C = S.C;
+
+SELECT R.A, R.B, R.C
+    ,  S.C, S.D, S.E
+FROM R FULL OUTER JOIN S ON R.C = S.C;
+
+---------
+--UNION
+--집합을 사용하려면 열의 개수가 동일해야 함
+--대응되는 컬럼이 자료형이 동일
+SELECT MEM_ID, MEM_NAME
+FROM MEMBER
+UNION ALL
+SELECT TO_CHAR(EMPLOYEE_ID), LAST_NAME || FIRST_NAME
+FROM HR.EMPLOYEES;
+
+--A UNION B : 중복제거하여 합 출력(중복된 데이터 제거 출력), 자동정렬됨
+--A UNION ALL B : 중복 포함하여 합 출력(중복된 데이터 모두 출력), 자동정렬되지 않음
+--A INTERSECT B : 중복된 데이터를 출력
+--A MINUS B : 중복된 데이터를 제외한 데이터 출력
+
+SELECT MEM_NAME
+    ,  MEM_JOB
+    ,  MEM_MILEAGE
+FROM MEMBER
+WHERE MEM_MILEAGE > 4000
+
+UNION
+
+SELECT MEM_NAME
+    ,  MEM_JOB
+    ,  MEM_MILEAGE
+FROM MEMBER
+WHERE MEM_JOB LIKE '자영업';
+
+--Q. 열의 개수가 다를 때?
+--A. 개수를 맞추기 위해 null을 사용한다
+--Q. A UNION B의 문법이 고정되어있나?
+--A. O
+--Q. 자동정렬 후 다른 컬럼으로 정렬 할 수 있나?
+--A. 병합한 문장을 크게 묶은 후 정렬
+
+SELECT T.MEM_NAME, T.MEM_JOB, T.MEM_MILEAGE
+FROM(
+SELECT MEM_NAME
+    ,  MEM_JOB
+    ,  MEM_MILEAGE
+FROM MEMBER
+WHERE MEM_MILEAGE > 4000
+
+UNION
+
+SELECT MEM_NAME
+    ,  MEM_JOB
+    ,  MEM_MILEAGE
+FROM MEMBER
+WHERE MEM_JOB LIKE '자영업'
+) T
+ORDER BY T.MEM_MILEAGE DESC
+;
+
+SELECT MEM_NAME
+    ,  MEM_JOB
+    ,  MEM_MILEAGE
+FROM MEMBER
+WHERE MEM_MILEAGE > 4000
+
+INTERSECT
+
+SELECT MEM_NAME
+    ,  MEM_JOB
+    ,  MEM_MILEAGE
+FROM MEMBER
+WHERE MEM_JOB LIKE '자영업';
+
+SELECT MEM_NAME
+    ,  MEM_JOB
+    ,  MEM_MILEAGE
+FROM MEMBER
+WHERE MEM_MILEAGE > 4000
+
+MINUS
+
+SELECT MEM_NAME
+    ,  MEM_JOB
+    ,  MEM_MILEAGE
+FROM MEMBER
+WHERE MEM_JOB LIKE '자영업';
+
+--상품분류테이블 상품테이블 회원테이블 자료수 조회
+SELECT 'LPROD' TABLE_ID
+    ,  COUNT(*) TABLE_COUNT
+FROM LPROD
+UNION
+SELECT 'PROD' TABLE_ID
+    ,  COUNT (*) TABLE_COUNT
+FROM PROD
+UNION
+SELECT 'MEMBER' TABLE_ID 
+    ,  COUNT(*) TABLE_COUNT
+FROM MEMBER;
+
+--장바구니 테이블
+--2005년도 4월에 판매된 상품
+--2005년도 5월에 판매된 상품
+--모두 해당되는 상품
+--Alias 판매상품코드, 상품명
+SELECT A.CART_PROD cartProd
+    ,  (SELECT PROD_NAME FROM PROD WHERE PROD_ID = A.CART_PROD) prodName
+FROM CART A
+WHERE SUBSTR(A.CART_NO,1,6) = '200504'
+INTERSECT
+SELECT CART_PROD B
+    ,  (SELECT PROD_NAME FROM PROD WHERE PROD_ID = B.CART_PROD)
+FROM CART B
+WHERE SUBSTR(B.CART_NO,1,6) = '200506';
+
+--EXIST를 이용하여 INTERSEcT
+--P302### 중에서 P302000012 여성 향수가 앞쪽 테이블에 없음
+--A와 B 집합 사이에 AND EXISTS를 작성
+--B 집합을 괄호에 묶은 후 B집합에 조인조건을 적는다
+
+SELECT A.CART_PROD cartProd
+    ,  (SELECT B.PROD_NAME FROM PROD B WHERE B.PROD_ID = A.CART_PROD) prodName
+FROM CART A
+WHERE SUBSTR(A.CART_NO,1,6) = '200504'
+AND EXISTS --EXISTS : 교집합 | NOT EXISTS : 차집합
+    (SELECT CART_PROD C
+         ,  (SELECT D.PROD_NAME FROM PROD D WHERE D.PROD_ID = C.CART_PROD)
+     FROM CART C
+     WHERE SUBSTR(C.CART_NO,1,6) = '200506'
+     AND C.CART_PROD = A.CART_PROD --조인조건(연결고리)
+);
+
+--2005년도 구매금액 2천만 이상 우수고객 지정 검색
+--Alias 회원ID 회원명, 우수고객
+--SUM(CART.CART_QTY*PROD.PROD_SALE)
+SELECT D.MEM_ID 회원ID
+    ,  D.MEM_NAME 회원명
+    ,  SUM(E.CART_QTY*F.PROD_SALE) 우수고객
+FROM MEMBER D, CART E, PROD F
+WHERE D.CART_MEMBER = E.MEM_ID
+AND D.CART_PROD = F.PROD_ID
+AND SUM(E.CART_QTY*F.PROD_SALE) > 20000000
+GROUP BY D.MEM_ID, D.MEM_NAME
+;
+
+SELECT M.MEM_ID 회원ID
+     , M.MEM_NAME 회원명
+     , '우수회원'
+FROM   MEMBER M
+WHERE  EXISTS 
+(
+       SELECT SUM(C.CART_QTY * P.PROD_SALE)
+       FROM   CART C, PROD P
+       WHERE  C.CART_PROD   = P.PROD_ID 
+       AND    C.CART_MEMBER = M.MEM_ID
+       AND    C.CART_NO LIKE '2005%'
+       HAVING SUM(C.CART_QTY * P.PROD_SALE) > 20000000
+);

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="kr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Music</title>
+		<link type="text/css" rel="stylesheet" href="../css/mystyle.css">
+		<script>
+			function play_music(e){
+				var ms_id = document.getElementById(e.getAttribute('id')).getAttribute('id');
+				var music_src = "../media/" + ms_id + "_audio.mp3";
+				document.getElementById("music").src = music_src;
+			}
+		</script>
+	</head>
+	<body>
+		<div class="frame_div">
+			<div id="music_div">
+				<audio id="music" src=" " controls autoplay></audio>
+			</div>
+			<div class="frame_music_items">
+				<div class="music_img" style="height: 200px;">
+					<img id="music1" alt="music1" src="../source/music_img1.jpg" onclick="play_music(this)">
+				</div>
+				<div style="height: 100px;">
+					<h3>양다일</h3>
+					<br>
+					<p>요즘</p>
+					<br>
+				</div>
+			</div>
+			<div class="frame_music_items">
+				<div id="music2" class="music_img" style="height: 200px;" >
+					<img id="music2" alt="music2" src="../source/../source/music_img2.jpg " onclick="play_music(this)">
+				</div>
+				<div>
+					<h3>SIA</h3>
+					<br>
+					<p>Titanium(feat. David Guetta)</p>
+					<br>
+				</div>
+			</div>
+			<div class="frame_music_items">
+				<div  class="music_img" style="height: 200px;">
+					<img id="music3" alt="music3" src="../source/../source/music_img3.jpg" onclick="play_music(this)">
+				</div>
+				<div>
+					<h3>10cm</h3>
+					<br>
+					<p>너에게 닿기를</p>
+					<br>
+				</div>
+			</div>
+			</div>
+		</div>
+	</body>
+</html>

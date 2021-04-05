@@ -1,0 +1,29 @@
+21.01.18 DB
+
+SQL(Structed Qwery Language)
+1. DDL (Data Definition Language) 데이터 정의 언어 (전체적인 구조)
+  - CREATE (생성)
+  - ALTER (구조변경)
+  - DROP (제거)
+2. DML (Data Manupulation Languagae) 데이터 조작 언어 (데이터)
+  - SELECT (검색)
+  - INSERT (입력)
+  - UPDATE (수정)
+  - DELETE (삭제)
+3. DCL (Data Control Language) 데이터 제약 언어 / 트랜잭션
+  - COMMIT (반영)
+  - ROLLBACK (되돌림)
+  - GRANT (권한부여)
+  - REVOKE (권한회수)
+
+
+SELECT * FROM 계정;
+(*) : 아스트링크
+
+데이터타입
+VARCHAR2() : 가변 길이 문자형(1-4000)
+CHAR() : 고정 길이 문자형(1-2000)
+NUMBER(p[,s]) : 숫자 데이터 저장(p:전체길이 / s:소수점이하)
+DATE : 날짜 데이터형
+
+CONSRAINT : 제약사항

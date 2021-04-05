@@ -1,0 +1,29 @@
+이클립스 단축키
+
+Ctrl + S 저장
+Ctrl + D 커서 위치 줄 삭제
+Ctrl + A 파일 전체 선택
+Ctrl + F 문자열 찾기
+Ctrl + N 새로운 파일
+Ctrl + M 현재 View/Editor를 최대 크기로 확대
+Ctrl + W 파일 닫기
+Ctrl + L 특정 줄 번호로 가기
+Ctrl + Space 코드 자동 완성
+Ctrl + Q 마지막 편집위치로 가기
+
+
+Ctrl + Shift + / 선택한 위치의 그룹 주석 달기
+Ctrl + Shift + \ 선택한 위치의 그룹 주석 제거
+Ctrl + Shift + F4 열린 파일 모두 닫기
+Ctrl + Shift + R 파일(클래스 포함) 찾기
+
+Ctrl + / 커서위치의 줄 주석 달기 / 제거
+Ctrl + , or . 커서 위치 기준 이전/다음 에러로 이동
+Ctrl + 1 에러에 대한 빠른 수정
+Ctrl + 객체클릭(or F3) 클래스나 메소드 혹은 멤버를 정의한 곳으로 이동
+Ctrl + F11 실행
+F11 디버깅
+
+Alt + ←/→ 이전 / 이후
+Alt + ↑/↓ 현재 줄 위치 위/아래로 이동
+

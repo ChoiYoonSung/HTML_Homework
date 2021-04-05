@@ -1,0 +1,64 @@
+<table> : 표 형태의 데이터를 표시하는데 사용됨
+
+<tr> : table row(행)
+<td> : table data(데이터)
+<th> : table header(각 열의 제목이 있는 경우 <tr>로 행을 만들고 그안에 사용
+
+순서 - <table> - <tr> - <td>
+
+
+속성
+겉 테두리 두께=> <table border="1">
+align
+bgcolor
+cellspacing
+frame
+rules 
+cellpadding
+
+행병합 (rowspan)
+
+열병합(colspan)
+
+-----------------------------
+<iframe>
+- Inline Frame
+- 웹 페이지 안에서 다른 웹 페이지를 표시하고자 할 때 사용
+- 익스플로러가 페이지 안에 프로엠을 놓기 위해 사용하던 태그, w3c는 iframe을 HTML 4.01부터 도입
+- 링크의 타겟 프레임으로 사용될 수 있음
+- title 속성 항상 추가 - 웹 접근성
+
+<a href="test.html" target="if_test">테스트</a>
+..
+<iframe scr="test2.html" width="300" height="200" name="if_test" title="설명" frameborder="0"></iframe>
+
+-----------------------------
+<div> <span>
+- <div> 페이지를 논리적인 섹션으로 분리하는데 사용
+ - 자체적으로 특별한 의미가 없으며 블록수준의 요소로서 모든 HTML요소를 묶는데 사용
+
+- <span>
+ - 자체적으로 특별한 의미가 없으며 인라인수준 요소로서 텍스트를 묶어 스타일을 적용할 때 사용
+ - 크기를 지정할 수 없음
+
+Block-level
+- Block-level 요소
+ - 사용 가능한 최대 가로 너비를 사용
+ - 크기지정 가능
+ - margin, padding 가능
+
+Inline-level
+- Inline-level 요소
+ - 필요한 만큼의 너비만 사용
+
+-----------------------------
+웹브라우저 멀티미디어
+플래시나 액티브x를 사용했었으나 HTML5에서 오디오와 미디어를 사용할 수 있게 됨
+
+오디오
+ - 특정 브라우저에서 사용 가능한 오디오 타입이 다르다
+ - control을 통해
+
+비디오
+ - 
+

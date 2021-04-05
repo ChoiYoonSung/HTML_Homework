@@ -1,0 +1,7 @@
+21.01.26 Java 과제
+
+학생성적프로그램 student
+method로 분할
+
+student에 성적 입력 및 합계/평균/석차 메소드 생성
+score에서 호출 및 출력

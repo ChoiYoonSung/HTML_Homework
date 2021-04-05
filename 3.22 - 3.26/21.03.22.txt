@@ -1,0 +1,12 @@
+JS HTML
+onload - 객체 로딩
+onclick - 요소 클릭
+ondbclick - 요소 더블 클릭
+onmouseover - 요소 마우스 올림
+onmousemove - 요소 마우스 움직임
+onmouseout - 요소 마우스 벗어남
+
+Drag & Drop
+- 드래그 되는 요소의 draggable속성을 true로 설정 (default : false)
+- dragstart : dataTransfer객ㅊ에 setDate() 호출 데이터 설정
+

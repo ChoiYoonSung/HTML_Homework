@@ -1,0 +1,10 @@
+21.03.30 HTML - JQUERY
+
+이벤트(event) 
+이벤트 핸들러(event handler) 이벤트를 처리하는 것
+이벤트 바인딩(event binding) 특정 요소에 이벤트 핸들러 연결
+
+$(selector).on <-> $(selector).off
+
+트리거 (trigger)
+트리거 핸들러 (trigger handler) - 기본요소 실행x 함수만 실행

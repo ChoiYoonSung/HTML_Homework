@@ -1,0 +1,109 @@
+-------------------------JSON-------------------------
+
+HTML	- 화면 디자인
+CSS	- 스타일
+JS 	- 동작기능
+	- 라이브러리(JQUERY)
+
+js {a : "a", b : "b", ...}
+json {"a" : "a", "b" : "b", ...}
+배열 {"a", "b", "c", ...}
+json object 배열 [{"a" : "a", "b" : "b", ...}]
+
+REQUEST (브라우저 -> 서버)
+객체 -> 문자
+JSON.stringify(obj); // string화 시킴
+->'{"a" : "a", "b" : "b", ...}'
+
+RESPONSE (서버 -> 브라우저)
+문자 -> 객체
+JSON.parse(string)
+-> {a : "a", b : "b", ...}
+
+
+
+
+(브라우저)
+1. 이벤트 발생
+2. JS에서 XMLHttpRequest
+...
+
+XMLHttpRequest 사용법
+var xhttp = new XMLHttpRequest();
+
+readyState
+- XMLHttpRequest의 상태
+0: 요청 준비 (객체만 생성)
+1: 서버 연결 완료 (open 메서드 호출)
+2: 요청받음 (send 메서드 호출)
+3: 요청 처리 중 (데이터 일부 받음)
+4: 요청 처리 완료 및 응답 준비(Response Ready) (데이터 전부 받음)
+
+status
+- 요청에 대한 ㅅ버의 응답 상태 코드
+200 : OK
+403 : Forbidden
+404 : Not Found
+500 : Internal Server Error
+
+사용법
+statusText : 요청에 대한 상태 문자
+responseText : 서버로부터 반환된 응답 정보(문자열)
+responseXML : 서버로부터 반환된 응답 정보(XML)
+
+open(method, url, async, user psw)
+ 요청 설정
+ - method : 요청 유형(GET/POST)
+ - url : 호출할 URL
+ - async : 동기/비동기 (false / true)
+
+send()
+
+
+GET : url 뒤에 요청할 내용을 붙임 (pop up 때만)
+
+POST : url만, setRequestHeader(방식, );
+
+xhttp.onreadystatechange = ~~
+ - 요청 응답이 왔을 때 동작 할 내용
+
+
+//
+CrossDomain
+domain -> ip -> 접속
+같은 패키지 안에서만 사용 가능하도록 제약
++ 로컬 안에서 접근하지 못하도록 제약
+
+http://localhost:9090/JQueryPro/html/jquery_chp9/jquery_chp9_request.html
+http://localhost:9090/JQueryPro
+--> WebContent 폴더
+--> src 폴더
+
+--동기식 처리에서--
+서버 전송(send) 후 결과처리 메서드(onreadystatechange)를 사용할 때 정상적으로 작동하지 않는다.
+ -> 동기식 처리는 결과를 요청하고 완료된 후 다음 작업을 수행하기 때문에
+     서버전송에서 결과가 바뀐 후 다시 바뀌지 않기 때문에 
+     onreadystatechange 메서드가 실행되지 않는다.
+
+--------------------AJAX-------------------------
+AJAX(중요)
+동기 <-> 비동기
+동기 : 응답이 오기 전까지 pause
+비동기 : 응답 여부와 상관없이 동작 계속 실행
+
+AJAX
+ - 프로그래밍 언어가 아님
+ - 비동기적으로 서버와 브라우저가 데이터를 주고 받는 방식
+ - 전체 페이지를 다시 로드 하지 않고, 웹 페이지의 일부를 업데이트 할 수 있음
+ - 브라우저 기본 객체인 XMLHttpRequest를 이용해서 웹 서버로 데이터 요청
+XMLHttpRequest
+ - 서버로부터 데이터를 받아오기 위해 사용하는 객체
+ - 전체 페이지를 다시 로드하지 않고 웹페이지의 일부를 업데이트 할 수 있게 함
+
+동작 원리
+브라우저 -인터넷-> 서버 -인터넷-> 브라우저
+
+.get
+.post
+.getJSON
+

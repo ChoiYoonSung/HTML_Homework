@@ -1,0 +1,40 @@
+JAVA
+
+Servlet
+- main에서 실행하는 방식이 아닌 servlet container(WAS)를 통해 서비스 제공
+- 대표적인 WAS로 Apache Tomcat이 있다.
+- 
+
+WebContent/WEB-INF/web.xml 파일은 반드시 존재해야 한다.
+WebContent/WEB-INF/lib - library로서 참조하는 모든 파일을 lib파일에 넣어야 한다.
+
+Dynamic Web Project으로 만드는 이유?
+- 사용자 요청에 따라 다른 내용을 보여줘야 하기 때문
+
+Servlet 연결 방법(매핑)
+<servlet>
+	<servlet-name></servlet-name>
+	<serlvet-class></serlvet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name></servlet-name>
+	<url-pattern></url-pattern>
+</servlet-mapping>
+
+기본 주소 -> localhost:portnumber/Application name/매핑한 url
+	(Context Root)
+
+1. init()			: 초기화하는 시점
+2. service 호출(doGet/doPost/....) : 요청한 동작을 실행하는 시점
+(default로 파라미터로 HttpServletRequest와 HttpServletResponse를 Tomcat이 던져준다)
+3. destroy()		: 종료 시점 (컨테이너에서 내림)
+
+web.xml에서
+<load-on-startup>으로 순서를 정해주게 되면 서버 구동과 동시에 
+Container에 올리게 된다.
+장점 : 서버 구동과 동시에 올라가기 때문에 빠른 로딩이 가능
+단점 : 메모리가 할당되어 구동되기 때문에 메모리 낭비가 있다.
+
+error-page
+ - 에러가 났을 때의 화면을 구현

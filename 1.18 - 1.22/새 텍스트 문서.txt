@@ -1,0 +1,8 @@
+앞으로 배울 것
+
+Oracle - 데이터
+Java (초급, 고급) - 데이터를 화면으로 이동
+HTML, CSS - 화면
+JAVAScript, JQuery - 화면동작
+Python
+Servelt(기본), JSP(쉽게 사용하기 위해), Spring(쉽게 사용하기 위해) - HTML과 Java 섞은 것

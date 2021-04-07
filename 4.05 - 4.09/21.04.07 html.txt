@@ -1,0 +1,13 @@
+21.04.07 html
+
+프로젝트 생성시 web.xml 필수로 생성해야 함
+
+JSP
+Java Server Page
+- 자바코드로 이루어짐
+- HTML + Java
+
+사용법
+<%
+--code--
+%>

@@ -1,0 +1,12 @@
+21.04.08 java
+
+binary 객체를 write하는 예제
+
+upload에서
+ vm에서 루트가 지정되어있지만 실질적인 물리적 주소는 따로 되어있어
+getRealPath() 메서드를 통해 얻어올 수 있다. 
+ (getServletContext()메서드를 호출함으로서 사용할 수 있다.)
+
+로컬 배포 위치
+D:\A_TeachingMaterial\3.HighJava\workspace\High-Java\.metadata\.plugins\org.eclipse.wst.server.core\tmp0
+

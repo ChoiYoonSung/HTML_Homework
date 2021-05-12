@@ -1,0 +1,20 @@
+21.04.09 html
+
+컨트롤러(서블릿) - 호출하는 역할
+- 서비스
+- Dao : CRUD, 
+- xml(쿼리) : 실제 쿼리
+
+
+html
+
+회원목록 -> 회원등록 
+		- member 
+			- memberList.html
+			- memberDetail.html
+			- memberModify.html
+			- memberRegist.html
+└ 회원상세
+└ 화면수집
+
+

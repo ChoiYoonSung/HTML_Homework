@@ -1,0 +1,42 @@
+21.04.08 html
+
+jQuery load
+- 서버에서 데이터를 받아서 특정요소에 넣음
+
+function(response status xhr)
+response : 호출 성공시 결과컨텐츠를 담
+status : 호출 결과
+xhr
+
+bootstrap
+- css, js를 쉽게 사용할 수 있도록 도와줌
+- doctype, 메타태그, css, js 추가
+
+주의
+- 부트스트랩js파일 내에 jquery가 포함되어있어
+  jquery를 먼저 선언해준 후 부트스트랩js을 선언해주어야 한다.
+
+컨테이너
+.container	: 고정크기 컨테이너 (width : -px)
+.container-fluid	: 가변크기 컨테이너 (width : 100%)
+
+<div>로 감싼 후 클래스이름을 container로 설정해준다.
+
+그리드시스템
+- 페이지를 12개의 컬럼으로 나눠 사용
+<div class="col-xs-12"> (col-크기-할당되는 개수)
+
+사이즈
+xs : 768미만(모바일)
+sm : 768이상(태블릿)
+md : 992이상(13인치 미만 노트북)
+lg : 1200px 이상(13인치 이상 노트북/데스크탑)
+
+Glyphicons
+<span>으로 설정하여 특수 이모티콘을 나타냄
+<span class="glyphicon glyphicon-name"></span>
+
+Modal
+- 팝업?
+
+

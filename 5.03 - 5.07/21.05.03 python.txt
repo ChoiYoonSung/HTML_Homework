@@ -1,0 +1,33 @@
+flexible 마인드를 가져라
+의견 표출을 명확히 해라
+기본기를 탄탄히 채워라
+
+java
+- int
+- String
+- float
+- boolean
+
+javaScript
+- var
+
+python
+- 없음
+
+
+python 주의할 점
+- tab으로 괄호영역을 정의
+if
+- 들여쓰기
+
+배열
+- javaScript에서 사용하는 array와 비슷한 형태
+- arr = []
+- len() : 배열 길이
+- range로 형성 가능 > range()
+
+for문
+- for 변수 in 배열 :
+- for문을 먼저 선언하지 말고 규칙성을 찾아라
+
+multi return

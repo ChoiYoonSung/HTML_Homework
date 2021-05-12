@@ -1,0 +1,16 @@
+클라이언트 <-> 서버
+
+Text / Binary
+Text
+- HTML / JavaScript / CSS
+Binary
+- File
+
+http : response by request (request 선행 방식)
+
+서블릿으로 파일 업로드를 할 시 문제점
+- 대용량 파일을 업로드 할 시 파일 업로드 종료시까지 작업 불가능
+- 해결법 : suvlet형식이 아닌 비동기방식으로 전송
+
+Markup을 해주지 않은 화면의 경우 text 그대로를 보여준다.
+

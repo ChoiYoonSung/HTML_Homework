@@ -1,0 +1,73 @@
+? : 무슨 기능인지 잘 모르겠음
+* : 알아두면 좋음
+**: 몰라도 상관없음
+표시없음 : 자주 쓰는 또는 알면 세상 편함~!!!!
+
+----소스편집----
+Ctrl + Shift + A : 블럭단위 입력 모드로 전환 -> alt?
+Ctrl + Shift + X : 블럭 설정 후 키 입력 시 대문자로 변환
+Ctrl + Shift + Y : 블럭 설정 후 키 입력 시 소문자로 변환
+Ctrl + D : 줄 삭제
+Ctrl + Alt + 위/아래 : 줄 복사
+*Shift + Enter : 다음줄에 새줄 추가
+**Ctrl + Shift + Enter : 현재 줄에 새줄 추가
+Ctrl + 좌/우 : 다음/이전 문자로 이동
+Alt + Shift + 방향키 : 블록선택하기
+Tab : 들여쓰기 (Shift + Tab : 내어쓰기)
+
+Ctrl + / : 라인별로 주석처리(java, js, ... ?)
+Ctrl + Shift + / : 블럭 주석 처리(java, html, jsp, ... ?)
+Ctrl + Shit + \ : 블럭 주석 제거(java, ...?)
+Ctrl + Shift + O : import 정리
+
+Ctrl + L : 원하는 라인으로 이동
+*Ctrl + H : 검색 다이얼로그(메서드, 타입, 패키지 등 검색 가능)
+Ctrl + Space : 코드어시스트 (키보드 Type3를 쓸 경우에는 왼쪽 Ctrl을 누른 상태에서 오른쪽 Ctrl을 누르고 왼쪽 Ctrl을 뗀 후에(오른쪽 Ctrl은 누른 상태) Space를 눌러준다.)
+Shift + Alt + R : 이름 변경하기
+F2 : 컴파일 에러의 빨간줄에 커서를 놓고 이 키를 누르면 에러 원인에 대한 힌트를 제공
+
+Ctrl + Shift + R : 리소스 찾기
+*Ctrl + Shift  + Space : 메서드의 괄호안에서 누르면 파라미터 타입 볼 수 있음.
+**Ctrl + 1 : 에러난 곳(빨간 줄 표시)에서 누르면 레이어로 해결방법이 나옴.
+F3 (또는 Ctrl + 마우스클릭) : 해당 메서드나 클래스가 정의된 곳으로 이동
+*Ctrl + Shift + G : 해당 메서드, 객체, 변수가 사용(호출)된 모든 곳을 찾는다.
+
+Ctrl + Shift + F : 코드 포맷팅(들여쓰기). BUT!!! 비추~~~
+
+----문자열찾기----
+Ctrl + F : 찾기 창 오픈
+Ctrl + K : 찾고자 하는 문자열 블럭 설정하고 이 키를 누르면 문자열을 찾는다.
+Ctrl + Shift + K : ctrl + k 역방향으로 문자열을 찾는다.
+
+----네비게이션----
+Ctrl + 페이지up/down (또는 Alt + 좌/우) : 열려있는 소스 이동
+Ctrl + O : 레이어로 현재파일의 Outline 보여줌. 선택해서 이동 가능.
+*Ctrl + E : 에디터안에서 열린 파일간의 이동(작은 레이어로 뜬다.)
+**Ctrl + Shift + E : 에디터안에서 열린 파일간의 이동
+**Ctrl + F6 : 에디터안에 열링 파일간 이동하는데 F6누를때마다 하나씩 순차적으로 넘어감.
+**Ctrl + F7 : 뷰간 전환
+**Ctrl + F8 : 퍼스펙티브 간 전환
+?F12 : 어디서든 에디터로 포커스 됨
+**Ctrl + T : 레이어로 계층구조 보여줌
+
+----디버깅----
+Ctrl + Shift + B : 현재 커서 라인에 break point 설정
+F11 : 최근 실행한 디버깅 실행
+F6 : 한 줄씩 디버깅
+F5 : 디버깅 한 줄씩 실행 함수 내부로 들어감
+F8 : 다음 break point까지 디버깅
+
+----실행----
+*Alt + Shift + X, R : Run on Server
+Ctrl + F11 : 최근 실행한 Run 실행
+
+----기타----
+*Ctrl + Shift + L : 단축키 리스트
+**Ctrl + 3 : Quick Access
+Ctrl + M : 화면 최대화
+*Ctrl + W : 파일에디터 닫기
+'sysout' + (Ctrl + space) : System.out.println() 문장 입력됨.
+Alt + Shift + J : 현재 커서가 있는 함수의 주석 생성
+Ctrl + N : 새로운 파일/프로젝트 생성
+Ctrl + S : 현재 파일 저장
+**Ctrl + Shift + S : 열려있는 모든 파일 저장

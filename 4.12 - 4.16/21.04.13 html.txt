@@ -1,0 +1,1 @@
+placeholder : input 입력 전 적혀있는 텍스트

@@ -1,0 +1,7 @@
+실제 필드에서의 쿼리-컨트롤러 연결
+
+key값(flag)을 받아 각각 C/R/U/D로 나누어 기능 호출
+
+<colgroup>
+	<col>
+</colgroup>

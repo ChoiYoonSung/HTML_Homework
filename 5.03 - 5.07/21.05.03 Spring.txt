@@ -1,0 +1,8 @@
+DNS Domain Name Service
+
+localhost : 127.0.0.1
+
+url = 서버 요청 형식
+통신방법://
+
+싱글톤 -팩토리- 템플릿 커맨드 이터레이터

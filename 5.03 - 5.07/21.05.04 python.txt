@@ -1,0 +1,18 @@
+OOP
+Object Oriented Programming
+객체	지향	프로그래밍
+
+class Class_Name:
+	def __init__(self):
+		self.생성자	#생성자
+	def method_name(self):
+		self.method	#메소드
+
+class Class_Inheritance:
+	def __init__(self):
+		super().__init__()	#상속
+
+Compiler vs Interpreter ?
+Java	    Python
+
+UI/UX		

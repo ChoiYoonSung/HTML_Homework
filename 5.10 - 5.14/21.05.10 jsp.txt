@@ -1,0 +1,5 @@
+Servlet -(foward)-> JSP -(WAS)-> .java -(compiler)-> .class -(interprinter)-> HTML...
+      -[req/resp]->
+
+<% %> 형식이 아닌 경우에는 브라우저에 던져준다
+<% %> 형식에 맞추어 작성하여야 한다.

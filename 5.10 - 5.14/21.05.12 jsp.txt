@@ -1,0 +1,12 @@
+page 
+request 
+session 
+application 
+
+fowarding
+redirect
+
+attribute
+
+EL의 핵심
+ - JSP의 자바적 요소를 배제
